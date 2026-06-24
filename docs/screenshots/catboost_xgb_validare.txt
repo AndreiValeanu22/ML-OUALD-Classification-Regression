@@ -1,0 +1,3 @@
+CatBoost clasificare — câștigător validare: d9_lr0.045 | acc validare: 0.7078 | iter (best): 438
+CatBoost regresie — câștigător validare: d9_cons | MSE validare: 46.7801 | iter (best): 964
+XGBoost — blend validare: cfg_clf= xd10 cfg_reg= xr7_s | w_cat_clf= 0.255 | acc blend val ~ 0.7602 | w_cat_reg= 0.609 | MSE blend val ~ 46.3773
