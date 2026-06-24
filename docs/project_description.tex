@@ -1,0 +1,67 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+
+\title{Machine Learning on the OUALD Dataset:\\Classification and Regression}
+\author{Andrei V\u{a}leanu \\ \texttt{andrei.valeanu03@stud.acs.upb.ro} \\ UPB -- Faculty of Automatic Control and Computers}
+\date{2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This report summarises an introductory machine learning project on the Open University Learning Analytics Dataset (OUALD). Two supervised tasks are addressed: multi-class classification of the final course outcome (\texttt{final\_result}) and regression of the coursework score (\texttt{final\_coursework\_score}). The workflow includes exploratory data analysis, preprocessing, baseline and boosting models, and export of predictions for Moodle and Kaggle.
+\end{abstract}
+
+\section{Introduction}
+The OUALD dataset contains demographic, engagement, and assessment features for Open University students. We predict the categorical outcome (Pass, Fail, Withdrawn, Distinction) and the numeric coursework score (0--100).
+
+\section{Data and preprocessing}
+\begin{itemize}
+  \item \textbf{EDA:} class balance, correlations, chi-square and ANOVA tests.
+  \item \textbf{Missing values:} median (numeric), mode (categorical).
+  \item \textbf{Outliers:} IQR masking on \texttt{total\_clicks\_early}.
+  \item \textbf{Features:} StandardScaler + one-hot (sklearn); native categories (CatBoost/XGBoost).
+\end{itemize}
+
+\section{Models}
+\begin{itemize}
+  \item Baselines: Decision Tree, Logistic Regression, Ridge, Lasso.
+  \item Boosting: HistGradientBoosting, CatBoost (grid search), XGBoost blend.
+  \item Kaggle: multi-seed ensemble + out-of-fold regression stacking for classification.
+\end{itemize}
+
+\section{Evaluation}
+\begin{table}[h]
+\centering
+\begin{tabular}{lll}
+\toprule
+Task & Target & Metric \\
+\midrule
+Classification & \texttt{final\_result} & Accuracy \\
+Regression & \texttt{final\_coursework\_score} & MSE \\
+\bottomrule
+\end{tabular}
+\caption{Tasks and metrics.}
+\end{table}
+
+\section{Outputs}
+Moodle: \texttt{CB\_OUALD\_predictii\_tema1.csv}. Kaggle: \texttt{kaggle\_TEMA1\_CB\_clasificare\_2026.csv}, \texttt{kaggle\_TEMA1\_CB\_regresie\_2026.csv}.
+
+\section{Conclusion}
+Boosting models outperform linear baselines on tabular OUALD data. CatBoost with categorical features and XGBoost blending provides the best results for the bonus competitions.
+
+\begin{thebibliography}{9}
+\bibitem{ouald} Open University Learning Analytics Dataset, \url{https://analyse.kmi.open.ac.uk/open-dataset/help/overview}
+\bibitem{sklearn} scikit-learn, \url{https://scikit-learn.org/stable/}
+\bibitem{catboost} CatBoost, \url{https://catboost.ai/en/docs/}
+\bibitem{xgb} XGBoost, \url{https://xgboost.readthedocs.io/}
+\end{thebibliography}
+
+\end{document}

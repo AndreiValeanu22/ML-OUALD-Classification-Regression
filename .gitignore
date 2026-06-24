@@ -1,0 +1,15 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+.cursor/
+.vscode/
+*.log
+*_backup.py
+_cell*.txt
+_nb_*.py
+*.pdf
+*.html
+*.zip
